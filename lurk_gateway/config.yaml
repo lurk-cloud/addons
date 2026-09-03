@@ -1,0 +1,58 @@
+name: Lurk Gateway
+version: "0.3.0"
+slug: lurk_gateway
+description: >-
+  Local Home Assistant manager and the single uplink/downlink channel to the
+  Lurk cloud. The unit enrolls itself with a factory token and holds a device
+  certificate from then on.
+url: https://github.com/lurk-cloud/addons
+arch:
+  - aarch64
+  - amd64
+# Pulled through Lurk's registry (a gate in front of the private GHCR
+# package): every unit holds its own login, set by the station and then by
+# the add-on itself at enrollment. Boxes never see GHCR.
+image: registry.lurk.site/lurk-cloud/lurk-gateway
+init: false
+startup: application
+boot: auto
+watchdog: "http://[HOST]:[PORT:8099]/health"
+homeassistant_api: true
+hassio_api: true
+hassio_role: manager
+ingress: true
+ingress_port: 8099
+ingress_stream: true
+panel_title: Lurk
+panel_icon: mdi:home-assistant
+panel_admin: true
+ports:
+  8099/tcp: null
+  8100/tcp: 8100
+ports_description:
+  8099/tcp: Ingress (leave unpublished)
+  8100/tcp: Local API for the mobile app (LAN)
+# `addon_config` is /config inside the container and /addon_configs/<slug> on
+# the host. It survives an add-on uninstall unless the user explicitly removes
+# the add-on's config, which is where the device key, certificate and
+# identity.json live. /data holds caches only.
+map:
+  - addon_config:rw
+# cloud_base_url defaults to production; the bench overrides it through
+# scripts/push.sh (CLOUD_BASE_URL in happ/.env). serial normally comes from the
+# hardware and the override exists only for bench units without one.
+# enrollment_token is written once by the factory (or by support after a
+# reflash) and is burned by the cloud on use.
+options:
+  cloud_base_url: "https://lurk.site"
+  serial: null
+  log_level: "info"
+schema:
+  cloud_base_url: "url?"
+  serial: "str?"
+  # Declared here but deliberately ABSENT from `options:` above. Supervisor
+  # (HAOS 18.2) rejects an optional option whose stored value is an explicit
+  # null -- "Missing required option" -- so an un-enrolled unit has to have
+  # no token at all rather than a null one.
+  enrollment_token: "str?"
+  log_level: "list(debug|info|warning|error)"

@@ -1,0 +1,17 @@
+configuration:
+  cloud_base_url:
+    name: Cloud base URL
+    description: HTTPS origin of the Lurk cloud (no trailing slash).
+  serial:
+    name: Serial override
+    description: Development only. Leave empty to use the hardware serial.
+  enrollment_token:
+    name: Enrollment token
+    description: >-
+      One-time token written by the factory, or issued by support after a
+      reflash. Burned on use; the unit then holds a certificate.
+  log_level:
+    name: Log level
+network:
+  8099/tcp: Ingress (leave unpublished)
+  8100/tcp: Local API for the mobile app

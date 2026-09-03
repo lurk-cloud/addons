@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.3.1
+
+- Station: Supervisor calls that take longer than ten seconds (image install,
+  restart) no longer time out in Home Assistant's relay.
+
 ## 0.3.0
 
 - Image pulled from `registry.lurk.site` with a per-unit credential the hub

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.2
+
+- Add-on: the optional `serial` no longer ships with a null default, which
+  Home Assistant Supervisor rejected on real Raspberry Pi units.
+- Station: Supervisor validation errors redact the one-time enrollment token.
+
 ## 0.3.1
 
 - Station: Supervisor calls that take longer than ten seconds (image install,

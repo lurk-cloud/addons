@@ -1,5 +1,5 @@
 name: Lurk Gateway
-version: "0.3.1"
+version: "0.3.2"
 slug: lurk_gateway
 description: >-
   Local Home Assistant manager and the single uplink/downlink channel to the
@@ -45,14 +45,14 @@ map:
 # reflash) and is burned by the cloud on use.
 options:
   cloud_base_url: "https://lurk.site"
-  serial: null
   log_level: "info"
 schema:
   cloud_base_url: "url?"
+  # Declared here but deliberately ABSENT from `options:` above. A real hub
+  # reads its hardware serial; only a bench writes an override. Supervisor
+  # rejects an optional option whose stored value is an explicit null.
   serial: "str?"
-  # Declared here but deliberately ABSENT from `options:` above. Supervisor
-  # (HAOS 18.2) rejects an optional option whose stored value is an explicit
-  # null -- "Missing required option" -- so an un-enrolled unit has to have
-  # no token at all rather than a null one.
+  # The factory writes the one-time token. Until then it must also be absent,
+  # not null, for the same Supervisor validation rule.
   enrollment_token: "str?"
   log_level: "list(debug|info|warning|error)"

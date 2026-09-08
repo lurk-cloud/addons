@@ -2,6 +2,19 @@
 
 ## Unreleased
 
+## 0.3.5
+
+- Updates: the cloud's "update now" never ran. The downlink handed the update
+  id to a callback that took no arguments, and the listener's handler guard
+  swallowed the TypeError, so every cloud-triggered update logged a failure and
+  did nothing.
+- Updates: an update may carry `scope: "addon"`, which updates this add-on only
+  and leaves Home Assistant OS and Core alone. The scope is persisted, so the
+  restart the update itself causes resumes the same narrow pass instead of
+  widening into a reboot.
+- Updates: `auto_update` is switched off for this add-on at startup. A unit
+  moves when its owner asks, not on Home Assistant's own schedule.
+
 ## 0.3.4
 
 - Updates: every update pass now reloads the add-on store before comparing

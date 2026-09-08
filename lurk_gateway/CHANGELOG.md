@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.3.4
+
+- Updates: every update pass now reloads the add-on store before comparing
+  versions. The Supervisor's `update_available` is measured against its cached
+  copy of the store, which refreshes on its own slow schedule, so a release
+  published minutes earlier was invisible and both the daily self-check and the
+  cloud's "update now" reported success having installed nothing.
+
 ## 0.3.3
 
 - Cloud: MQTT keepalive drops from 30s to 15s. The broker declares a hub dead

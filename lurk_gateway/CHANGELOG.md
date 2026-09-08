@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.3.6
+
+- No functional change. Published to prove a release reaches a delivered unit
+  over the air: 0.3.5 was the last version that had to be installed by hand,
+  because the receive path it fixes was the one that was broken.
+
 ## 0.3.5
 
 - Updates: the cloud's "update now" never ran. The downlink handed the update

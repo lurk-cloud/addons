@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.3.8
+
+- No functional change. The first release installed entirely over the air, from
+  the app, with nothing typed on the box.
+
 ## 0.3.7
 
 - Updates: self-update asked the Supervisor to update the slug `self`, which

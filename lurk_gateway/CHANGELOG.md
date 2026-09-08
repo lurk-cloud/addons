@@ -1,10 +1,23 @@
 # Changelog
 
+## Unreleased
+
+## 0.3.3
+
+- Cloud: MQTT keepalive drops from 30s to 15s. The broker declares a hub dead
+  at 1.5x keepalive before publishing the last-will, so an unplugged unit now
+  shows as offline in 22.5s instead of 45s.
+- LAN API: the role in the retained auth document's `members[]` entry now
+  overrides the edge token's `role` claim, so a role change made in the app
+  reaches the LAN with the next document instead of the next token.
+
 ## 0.3.2
 
 - Add-on: the optional `serial` no longer ships with a null default, which
   Home Assistant Supervisor rejected on real Raspberry Pi units.
 - Station: Supervisor validation errors redact the one-time enrollment token.
+- Station: the box check reads the whole `/health` answer; a body that arrived
+  after the headers was dropped and reported as "this box says it is ?".
 
 ## 0.3.1
 

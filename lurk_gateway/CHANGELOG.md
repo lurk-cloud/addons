@@ -2,11 +2,18 @@
 
 ## Unreleased
 
+## 0.3.7
+
+- Updates: self-update asked the Supervisor to update the slug `self`, which
+  addresses this add-on for reads but does not exist in the store an update
+  resolves against. Every self-update failed with "App self does not exist in
+  the store". The real slug is read from the add-on's own info and used
+  instead.
+
 ## 0.3.6
 
 - No functional change. Published to prove a release reaches a delivered unit
-  over the air: 0.3.5 was the last version that had to be installed by hand,
-  because the receive path it fixes was the one that was broken.
+  over the air.
 
 ## 0.3.5
 

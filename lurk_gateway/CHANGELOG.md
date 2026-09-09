@@ -2,66 +2,48 @@
 
 ## Unreleased
 
-## 0.3.11
+## 0.3.12
 
-- No functional change. The first release installed from the app with nothing
-  typed on the box.
+- Updates: the self-update asks Core to install the add-on's update entity, and
+  Core does not answer until the image is pulled and the container replaced.
+  That ran on the HA client's 20s read timeout, so a slow pull reported
+  `failed` for an update that was still running — and clearing the in-progress
+  flag killed the resume that would have sent the real result. The install now
+  gets the same 20-minute budget the Supervisor call had.
+- Cloud: `agent_version` is what the Supervisor reports installed, not a
+  version declared in this source tree. The cloud's "is there an update" is
+  that value against the store's, so the two have to come from the same place;
+  a hand-maintained copy drifting either hides an update or offers one forever.
 
-## 0.3.10
+## 0.3.3 — 0.3.11
 
-- No functional change. The first release installed from the app with nothing
-  typed on the box.
+Getting a delivered unit to update itself from the app, with nothing typed on
+the box. Nine releases because each fix could only be proved by publishing one
+and watching a real unit take it.
 
-## 0.3.9
-
-- Updates: self-update now asks Home Assistant to install the add-on's own
-  update entity instead of asking the Supervisor directly. The Supervisor
-  refuses an add-on's request to update itself ("App <slug> can't update
-  itself!"), because the update kills the container mid-request; the same ask
-  from Core is allowed. Falls back to the old call when Core has no matching
-  entity.
-
-## 0.3.8
-
-- No functional change. The first release installed entirely over the air, from
-  the app, with nothing typed on the box.
-
-## 0.3.7
-
-- Updates: self-update asked the Supervisor to update the slug `self`, which
-  addresses this add-on for reads but does not exist in the store an update
-  resolves against. Every self-update failed with "App self does not exist in
-  the store". The real slug is read from the add-on's own info and used
-  instead.
-
-## 0.3.6
-
-- No functional change. Published to prove a release reaches a delivered unit
-  over the air.
-
-## 0.3.5
-
-- Updates: the cloud's "update now" never ran. The downlink handed the update
+- Updates: the cloud's "update now" never ran — the downlink handed the update
   id to a callback that took no arguments, and the listener's handler guard
   swallowed the TypeError, so every cloud-triggered update logged a failure and
   did nothing.
+- Updates: every pass reloads the add-on store before comparing versions. The
+  Supervisor's `update_available` is measured against its cached copy of the
+  store, which refreshes on its own slow schedule, so a release published
+  minutes earlier was invisible and both the daily self-check and the cloud's
+  "update now" reported success having installed nothing.
+- Updates: the self-update asked the Supervisor to update the slug `self`,
+  which addresses this add-on for reads but does not exist in the store an
+  update resolves against — every attempt failed with "App self does not exist
+  in the store". The real slug is read from the add-on's own info.
+- Updates: the ask then moved to Home Assistant. The Supervisor refuses an
+  add-on's request to update itself ("App <slug> can't update itself!") because
+  the update kills the container mid-request; the same ask from Core is
+  allowed. Falls back to the Supervisor when Core has no matching entity.
 - Updates: an update may carry `scope: "addon"`, which updates this add-on only
   and leaves Home Assistant OS and Core alone. The scope is persisted, so the
   restart the update itself causes resumes the same narrow pass instead of
-  widening into a reboot.
+  widening into a reboot, and the resume does not re-announce `started`.
 - Updates: `auto_update` is switched off for this add-on at startup. A unit
   moves when its owner asks, not on Home Assistant's own schedule.
-
-## 0.3.4
-
-- Updates: every update pass now reloads the add-on store before comparing
-  versions. The Supervisor's `update_available` is measured against its cached
-  copy of the store, which refreshes on its own slow schedule, so a release
-  published minutes earlier was invisible and both the daily self-check and the
-  cloud's "update now" reported success having installed nothing.
-
-## 0.3.3
-
 - Cloud: MQTT keepalive drops from 30s to 15s. The broker declares a hub dead
   at 1.5x keepalive before publishing the last-will, so an unplugged unit now
   shows as offline in 22.5s instead of 45s.

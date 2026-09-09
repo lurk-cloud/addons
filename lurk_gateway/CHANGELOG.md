@@ -2,6 +2,15 @@
 
 ## Unreleased
 
+## 0.3.9
+
+- Updates: self-update now asks Home Assistant to install the add-on's own
+  update entity instead of asking the Supervisor directly. The Supervisor
+  refuses an add-on's request to update itself ("App <slug> can't update
+  itself!"), because the update kills the container mid-request; the same ask
+  from Core is allowed. Falls back to the old call when Core has no matching
+  entity.
+
 ## 0.3.8
 
 - No functional change. The first release installed entirely over the air, from

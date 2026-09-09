@@ -2,6 +2,16 @@
 
 ## Unreleased
 
+## 0.3.14
+
+- Build: `BUILD_VERSION` has no default in the Dockerfile. It was pinned at
+  0.3.2 and eleven releases stale, so a locally built image was labelled
+  `io.hass.version=0.3.2`. CI passes the tag and the Supervisor passes
+  config.yaml's version, so the default was only ever wrong.
+- Nothing changes for a unit: the published image already carried the right
+  label. This is the first release cut by `scripts/release.sh`, and proving
+  that path is the reason it exists.
+
 ## 0.3.13
 
 - Updates: a failure always carries a reason. `str()` of an httpx timeout is

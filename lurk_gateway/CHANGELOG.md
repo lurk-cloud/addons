@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+## 0.3.13
+
+- Updates: a failure always carries a reason. `str()` of an httpx timeout is
+  the empty string, so the payload dropped the field and the cloud recorded
+  `failed` with no error at all — which is how both of the updates that timed
+  out on the old 20-second budget arrived, and why neither could be diagnosed
+  without reading the box. Falls back to the exception's type name.
+
 ## 0.3.12
 
 - Updates: the self-update asks Core to install the add-on's update entity, and

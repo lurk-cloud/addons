@@ -1,5 +1,5 @@
 name: Lurk Gateway
-version: "0.3.10"
+version: "0.3.11"
 slug: lurk_gateway
 description: >-
   Local Home Assistant manager and the single uplink/downlink channel to the

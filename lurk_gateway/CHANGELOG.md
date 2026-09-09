@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+## 0.3.11
+
+- No functional change. The first release installed from the app with nothing
+  typed on the box.
+
 ## 0.3.10
 
 - No functional change. The first release installed from the app with nothing

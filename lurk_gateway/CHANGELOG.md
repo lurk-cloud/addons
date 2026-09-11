@@ -1,5 +1,13 @@
 # Changelog
 
+## 0.3.17
+
+- `home_state` now answers with sensors and binary sensors as well as the
+  controllable domains, each with its name and room, read live from Home
+  Assistant. Every tool call is logged by name.
+- A `/v1/state` send that loses the race with its own eviction ends the
+  connection quietly instead of logging a traceback.
+
 ## 0.3.16
 
 - The voice relay answers Lurk's tool calls on the box: `home_state` from the

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.18
+
+- `home_state` answers with every entity Home Assistant has, not a domain
+  list, and `control_device` accepts any service in the entity's own domain.
+  Camera access tokens and GPS coordinates are the only attributes withheld.
+
 ## 0.3.17
 
 - `home_state` now answers with sensors and binary sensors as well as the

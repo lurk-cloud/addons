@@ -1,5 +1,12 @@
 # Changelog
 
+## 0.3.20
+
+- Until the service registry is known, the hub reports no `actions` at all
+  rather than an empty list, so the cloud falls back instead of refusing
+  everything; once the registry arrives every LAN row is re-sent. A failed
+  `get_services` is logged as a warning.
+
 ## 0.3.19
 
 - Every device row carries `actions`: the Home Assistant services this

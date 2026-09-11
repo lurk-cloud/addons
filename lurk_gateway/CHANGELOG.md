@@ -1,6 +1,14 @@
 # Changelog
 
-## Unreleased
+## 0.3.16
+
+- The voice relay answers Lurk's tool calls on the box: `home_state` from the
+  LAN cache and the structure, `control_device` through the same path as the
+  LAN control API, with the member's role enforced. The phone never sees the
+  call (`docs/contract-voice.md` › Relay).
+- A `/v1/state` socket evicted by its own handset's reconnect no longer logs a
+  traceback: a send after the close now ends that connection as a plain
+  disconnect.
 
 ## 0.3.15
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.22
+
+- `control_device` takes the service name `home_state` advertises (`turn_off`,
+  not `fan.turn_off`; the dotted form still works) and builds the call from
+  the entity's own domain. `home_state` answers one text line per entity
+  instead of JSON rows, a third of the tokens; a control answers with that
+  entity's line, so the same attributes are withheld on both. Target keys in
+  `params` can no longer retarget a call.
+
 ## 0.3.21
 
 - A mirror collection the hub has never published, such as `services` on

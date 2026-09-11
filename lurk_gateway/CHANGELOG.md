@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+## 0.3.15
+
+- `WS /v1/voice`: the hub relays a phone's Gemini Live session on the LAN.
+  Edge JWT bearer, a `start` frame carrying the minted socket URL, then an
+  opaque relay — the hub never reads a frame. See `docs/contract-voice.md`.
+
 ## 0.3.14
 
 - Build: `BUILD_VERSION` has no default in the Dockerfile. It was pinned at

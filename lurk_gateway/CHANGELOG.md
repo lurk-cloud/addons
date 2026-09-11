@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.3.19
+
+- Every device row carries `actions`: the Home Assistant services this
+  entity qualifies for, computed from its `supported_features` against the
+  service registry (`get_services`). The structure carries `services`, the
+  registry's fields and selectors for the domains present, and the cloud
+  mirror gains a `services` collection. `home_state` rows carry `actions`
+  too, and a service call Home Assistant refuses comes back with its own
+  error text.
+
 ## 0.3.18
 
 - `home_state` answers with every entity Home Assistant has, not a domain

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.21
+
+- A mirror collection the hub has never published, such as `services` on
+  first boot after an upgrade, is published on connect instead of waiting for
+  the periodic pass.
+
 ## 0.3.20
 
 - Until the service registry is known, the hub reports no `actions` at all

@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.3.23
+
+- The voice relay logs the events that shape a turn without logging any
+  content: an `interrupted`, a `toolCallCancellation`, a `goAway`, and how
+  long each tool answer took.
+
 ## 0.3.22
 
 - `control_device` takes the service name `home_state` advertises (`turn_off`,
